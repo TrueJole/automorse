@@ -1,4 +1,4 @@
-# morse
+# automorse
 
 Morse code decoder for the [BF1 easter eggs](https://wiki.gamedetectives.net/index.php?title=Battlefield_1#Headphones_and_Morse_code).
 
@@ -7,18 +7,45 @@ Morse code decoder for the [BF1 easter eggs](https://wiki.gamedetectives.net/ind
 * `numpy`
 * `scipy`
 * `numba`
+* `audio_extract`
+* `(pydub)`
+
+## Installation
+
+Download this repository as a .zip file and unpack or execute 
+```bash
+git clone https://github.com/TrueJole/automorse.git
+```
+
+There run 
+```bash
+pip install -r requirements.txt
+```
 
 ## Usage
 
-This code is intended for `.wav` files, with Morse transmitted at 20 wpm. To use, run `python main.py [PATH_TO_AUDIO]` in the command line. A few characters may be wrong due to noise in the recording. The first run of the program will be slower than usual due to the creation of a `numba` JIT cache for the spectrogram subroutine.
+This code is intended for any audio or video files, with Morse transmitted at 20 wpm. To use, run `python main.py [PATH_TO_FILE]` in the command line. A few characters may be wrong due to noise in the recording. The first run of the program will be slower than usual due to the creation of a `numba` JIT cache for the spectrogram subroutine.
 
 ### Example
 
 ```bash
-> python main.py ~/Videos/B2.wav
-Detected frequency: 791.002443208847 Hz
-Detected WPM: 20.0 wpm
- HCRUHC REMEMBER FIRST RULE. IF COMPROMISED. L PILL. SNEIMANIURHCRUHC REMEMBER FIRST RULE. IF COMPROMISED. L PILL. SNEIMANIURHCRUHC REMEMBER FI
+> python main.py ~/Downloads/example.mp4
+Success : audio file has been saved to "/tmp/tmpeklkftg8.wav".
+GUWTVMEEWLALJDNACOMHOCRQFHYLFWLHZAJHRHIIVVIQAMZHWFWNSHGOKTYHHDOACOMHOACZEBOUJHMGGUWTVMEEWLALJDN H
+
+
+AN ESCALATION:
+Most likely first letter: A : 1  ( 50 %)
+Most likely fives:  : 0  ( 0 %)
+
+
+A BEGINNING:
+[1.0, 'CRATE JABAL JIFAR', 'GUWTVMEEWLALJDN', 'https://bf1morse.leonlarsson.com/locations/jifar2.png', 'Sinai Desert', '7']
+[0.5161290322580645, 'CRATE TRENCH CANAL', 'GUWTVWVHJCYFEQWL', 'https://bf1morse.leonlarsson.com/locations/canal1.png', 'Suez', '7']
+[0.4242424242424242, 'CRATE SEREN VENETIAN', 'GUWTVVIUANMHRHPIRQ', 'https://bf1morse.leonlarsson.com/locations/venetian1.png', 'Monte Grappa', '7']
+
+(🤖100%) (Stage 7) CRATE JABAL JIFAR: Sinai Desert | https://bf1morse.leonlarsson.com/locations/jifar2.png
+
 ```
 
 ## Algorithm
@@ -34,7 +61,7 @@ Detected WPM: 20.0 wpm
 
 ## TODO
 
-1. Add automatic decryption for BF1 easter egg ciphers, based on input stage
+1. Add automatic decryption for BF1 An Omen easter egg cipher
 2. Port everything to a web app
 3. Improve sensitivity for low S/N ratio data
-4. Add support for more file types
+4. Improve documentation
